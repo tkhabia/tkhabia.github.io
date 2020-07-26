@@ -9,5 +9,12 @@ class formInput(FlaskForm):
         if isinstance( data[i]['max'] , int):
             formInputsArray.append(IntegerField(i , [
                 DataRequired(),
-                NumberRange()
+                NumberRange(max=data[i]['max'] , min=data[i]['min'] , message="Input given is out of range {0} - {1}".format(data[i]['max'] ,data[i]['min'] ))
             ]))
+        else:
+            formInputsArray.append(FloatField(i , [
+                DataRequired(),
+                NumberRange(max=data[i]['max'] , min=data[i]['min'] , message="Input given is out of range {0} - {1}".format(data[i]['max'] ,data[i]['min'] ))
+            ]))
+    formInputsArray.append(SubmitField('Submit'))
+    
